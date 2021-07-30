@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using Microsoft.VisualBasic.Devices;
 
@@ -7,6 +7,7 @@ namespace DataTransfer.General
     public static class SystemInfo
     {
         private static readonly ComputerInfo info = new ComputerInfo();
+        private const ulong INT32_MAX = int.MaxValue;
 
         /// <summary>
         /// Memory occupied by this process.
@@ -18,12 +19,12 @@ namespace DataTransfer.General
         /// </summary>
         /// <param name="Value">Value to check.</param>
         /// <returns>True if exceeds.<para>False if doesn't.</para></returns>
+        /// <remarks>Receives int because chunk sizes are <see cref="Int32"/>s and this part is only important when <see cref="ComputerInfo.AvailablePhysicalMemory"/> is less than or equal to <see cref="Int32.MaxValue"/> cause in all of the other cases, the result will always be false.</remarks>
         public static bool ExceedsAvailableMemory(int Value)
         {
-            unchecked
-            {
-                return (ulong)Value > info.AvailablePhysicalMemory;
-            }
+            if (info.AvailablePhysicalMemory > INT32_MAX)
+                return false;
+            return (ulong)Value > info.AvailablePhysicalMemory;
         }
     }
 }
