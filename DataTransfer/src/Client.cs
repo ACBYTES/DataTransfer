@@ -1,4 +1,4 @@
-﻿using DataTransfer.General;
+using DataTransfer.General;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -53,16 +53,6 @@ namespace DataTransfer.src
         private static Mutex m_On_Operation_Done;
         private static Mutex m_Write_Lock;
         private static CancellationTokenSource cts_Read;
-
-        /// <summary>
-        /// Current file that's being processed and <see cref="WriteToStream(byte[], string)"/>'s thread is waiting for to get done with all of its processings to release <see cref="m_Write_Lock"/>.
-        /// </summary>
-        private static string activeProcessingFileName;
-
-        /// <summary>
-        /// <see cref="activeProcessingFileName"/>'s processing state showing whether its processings are done yet, or not to let <see cref="WriteToStream(byte[], string)"/>'s active thread release <see cref="m_Write_Lock"/>.
-        /// </summary>
-        private static bool activeFileNameProcessingDone = false;
 
         /// <summary>
         /// Returns a string containing client's current conditions, files, etc...
@@ -255,24 +245,6 @@ namespace DataTransfer.src
                 }
                 else
                     clientStream.Flush();
-            }
-        }
-
-        /// <summary>
-        /// Sets the current file that's being processed and the <see cref="WriteToClient(byte[], string)"/>'s mutex is waiting for to release.
-        /// </summary>
-        /// <param name="FileName">Filename that processings are being done on.</param>
-        /// <param name="State">State of processing. (<see cref="WriteToStream(byte[], string)"/> is the only method that calls this method, setting this to false.)</param>
-        /// <remarks>This process is necessary because simultaneous files might each send different commands at the same time and releasing the mutex when a header type is something like <see cref="HeaderType.FileCancellationSignal"/> should happen instantly. We shouldn't release the write mutex if the file that's requested a write and has locked the method isn't the same as the one that has sent a command.
-        /// <para>If <paramref name="FileName"/> isn't the same as <see cref="activeProcessingFileName"/> and <paramref name="State"/> is true, this method will not change anything unless they both are the same names. Else, variables will get updated.</para></remarks>
-        public static void SetActiveFileNameHeaderProcessingState(string FileName, bool State)
-        {
-            if (activeProcessingFileName == FileName && State)
-                activeFileNameProcessingDone = State;
-            else
-            {
-                activeProcessingFileName = FileName;
-                activeFileNameProcessingDone = State;
             }
         }
 
