@@ -1,4 +1,4 @@
-﻿using DataTransfer.General;
+using DataTransfer.General;
 using System;
 using System.IO;
 using System.Threading;
@@ -396,7 +396,6 @@ namespace DataTransfer.src
                 data[0] = (byte)HeaderType;
                 data[1] = fileNameLen;
                 data.Emplace(b_FileName, 2);
-                Client.SetActiveFileNameHeaderProcessingState(fileName, true);
                 Client.WriteToStream(data, fileName);
             }
 
@@ -407,7 +406,6 @@ namespace DataTransfer.src
             {
                 byte[] signal = new byte[MAX_CANCELLATION_SIGNAL_SIZE_NO_FILENAME + fileNameLen];
                 EmplaceHeader(ref signal);
-                Client.SetActiveFileNameHeaderProcessingState(fileName, true);
                 Client.WriteToStream(signal, fileName);
             }
 
@@ -501,7 +499,6 @@ namespace DataTransfer.src
 
             public void Dispose()
             {
-                Server.SetActiveFileNameHeaderProcessingState(fileName, true); //Release for any unexpected exception or end of file confirmation that happens when the whole file is received and a chunk confirmation is sent.
                 if (_disposed)
                     return;
                 _disposed = true;
