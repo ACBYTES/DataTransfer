@@ -51,7 +51,6 @@ namespace DataTransfer.src
         private static IPEndPoint clientEndPoint;
 
         private static Mutex m_On_Operation_Done;
-        private static Mutex m_Write_Lock;
         private static CancellationTokenSource cts_Read;
 
         /// <summary>
@@ -82,7 +81,6 @@ namespace DataTransfer.src
                     clientEndPoint = ClientEndPoint;
                     cts_Read = new CancellationTokenSource();
                     m_On_Operation_Done = new Mutex();
-                    m_Write_Lock = new Mutex();
                     Task.Factory.StartNew(ReadStream, cts_Read.Token);
                 }
                 else
@@ -134,11 +132,6 @@ namespace DataTransfer.src
             {
                 if (cts_Read != null)
                     cts_Read.Cancel();
-            }
-            catch { }
-            try
-            {
-                m_Write_Lock.Dispose();
             }
             catch { }
             try
