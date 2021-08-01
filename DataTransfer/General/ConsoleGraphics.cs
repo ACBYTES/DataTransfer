@@ -108,14 +108,6 @@ namespace DataTransfer.General
     }
 
     /// <summary>
-    /// All of the external console shapes available.
-    /// </summary>
-    public enum ConsoleExternShapes
-    {
-        Folder
-    }
-
-    /// <summary>
     /// Defines an entity that's a console shape containing specific functionalities.
     /// </summary>
     public interface IConsoleShape
