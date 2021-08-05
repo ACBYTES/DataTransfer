@@ -6,7 +6,8 @@
 (! Can handle multiple files at the same time !)
 (! Connection failures or timeouts will lead to cancellations that if needed, could be replaced by retrials !)
 (! [Server.cs.220] The attempt for checking the available physical memory is somehow dummy. This has been done to just make sure there's enough memory for each chunk at construction but no functionalities on the server or client side have been implemented to deal with memory shortages, meaning that if either of the sides run out of memory during execution, chunks won't be read/sent/received in smaller sizes and thus, 'OutOfMemoryException's are possible.
-   This workflow was not intended for this project !)
+This workflow was not intended for this project !)
+(! If there's an active client connected and a new client gets connected to the server as well, the success message will be shown to the new user although the server does only accept one client at a time so the connection will be queued on the server side. No implementation has been done to approve pending connections as it was intended for this project !)
 Workflow:
 - (Starting as a server or as a client)
 {
