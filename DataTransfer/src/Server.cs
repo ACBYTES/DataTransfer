@@ -81,7 +81,7 @@ namespace DataTransfer.src
         /// </summary>
         public static string GetStatus()
         {
-            return $"- Server is up and running on ({serverEndPoint.Address}:{serverEndPoint.Port}).\n\n- {(client == null ? "There's not an active client connected." : $"An active client is connected on {clientEndPoint.Address}:{clientEndPoint.Port}")}\n\n- " +
+            return $"- Server is up and running on ({serverEndPoint.Address}:{serverEndPoint.Port}).\n\n- {(client == null ? "There's not an active client connected." : $"An active client is connected on ({clientEndPoint.Address}:{clientEndPoint.Port})")}\n\n- " +
                 $"Active files being sent: [{(activeFiles == null ? "No active files are being sent." : activeFiles.ToString(", ", true))}]";
         }
 
@@ -176,13 +176,22 @@ namespace DataTransfer.src
         /// </summary>
         private static void Clear()
         {
-            foreach (ServerFile item in activeFiles)
+            try
             {
-                item.Cancel("SERVER-CLEARANCE", false);
+                foreach (ServerFile item in activeFiles)
+                {
+                    item.Cancel("SERVER-CLEARANCE", false);
+                }
             }
+            catch {}
             client = null;
             clientEndPoint = null;
-            clientStream.Dispose();
+            try
+            {
+                clientStream.Dispose();
+            }
+            catch { }
+            clientStream = null;
             activeFiles.Clear();
             cts_Response = new CancellationTokenSource();
             try
@@ -192,6 +201,7 @@ namespace DataTransfer.src
             catch { }
             m_Write_Lock = new Mutex();
             Task.Factory.StartNew(ListenForClient);
+            WriteShape(ConsoleColor.Green, ConsoleShapes.Rectangle, "Server got successfully cleared!");
         }
 
         /// <summary>
