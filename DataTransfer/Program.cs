@@ -24,7 +24,6 @@ namespace DataTransfer
             WriteShape(ConsoleColor.Magenta, ConsoleShapes.Rectangle, "PLEASE USE IN FULLSCREEN FOR CORRECT EXPERIENCE");
             HandleCommands(Args.ToString(" "));
             new Thread(ReadTillTermination).Start();
-            GC.Collect();
         }
 
         static void ReadTillTermination()
