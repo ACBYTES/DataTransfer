@@ -1,4 +1,4 @@
-﻿using DataTransfer.General;
+using DataTransfer.General;
 using DataTransfer.src;
 using System;
 using System.Threading;
