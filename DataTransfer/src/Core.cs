@@ -15,8 +15,8 @@ namespace DataTransfer.src
     /// </summary>
     public static class Core
     {
-        public const string STARTUP_MESSAGE = "DEVELOPED BY [ACBYTES (ALIREZA SHAHBAZI) - (HTTPS://WWW.ACBYTES.IR)]";
-        public const string WEBSITE = "https://www.acbytes.ir";
+        public const string STARTUP_MESSAGE = "DEVELOPED BY [ACBYTES (ALIREZA SHAHBAZI) - (HTTPS://WWW.ACBYTES.COM)]";
+        public const string WEBSITE = "https://www.acbytes.COM";
 
         public delegate void F_OneParam<T>(T Param);
         public delegate T SpanComparator<out T>(ReadOnlySpan<char> C);

@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "K1/KykQueXf9XS7Gv2dOH43dJ2vZf2oHx8RjPog8VxiPr973c6lIgm85ZLTAQHEs/AUYhTPMOdk1468geXUSZQ==",
+  "success": true,
+  "projectFilePath": "M:\\Visual Studio Projects\\source\\source\\repos\\DataTransfer\\GitHub\\DataTransfer\\DataTransfer\\DataTransfer.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ACBYTES\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.17\\microsoft.netcore.app.host.win-x64.5.0.17.nupkg.sha512"
+  ],
+  "logs": []
+}
