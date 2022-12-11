@@ -1,4 +1,4 @@
-﻿!!!! DEVELOPED BY [ACBYTES (ALIREZA SHAHBAZI) - (HTTPS://WWW.ACBYTES.IR)] !!!!
+﻿!!!! DEVELOPED BY [ACBYTES (ALIREZA SHAHBAZI) - (HTTPS://WWW.ACBYTES.COM)] !!!!
 (! Everything works on one single stream, thus, locking stream writes are necessary to avoid data loss as chunks are read in a pre-calculated order. On the other hand, packet counts aren't guaranteed !)
 (! For a bit less work, there are no end-of-file commands sent and when the whole file is received, the corresponding ClientFile confirms its chunk and both sides dispose their IFile objects !)
 (! Space-separated path handling has not been implemented, Use -explorer for the ease of use !)
